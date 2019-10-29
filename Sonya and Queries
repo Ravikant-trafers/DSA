@@ -1,0 +1,73 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <cstdlib>
+#include <vector>
+#include <algorithm>
+#include <map> 
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(false); cin.tie(nullptr);                                                        
+ 
+string f(long long n)
+{
+	string s ="";
+	while(n > 0)
+	{
+	 	long long rem = n%10;
+	 	if(rem%2)
+	 		s = '1'+s;
+	 	else
+	 		s = '0'+s;
+	 	n /= 10;
+	}
+	while(s.size() != 18)
+		s = '0'+s;
+	return s;
+}
+ 
+int32_t main()
+{
+	IOS;
+	#ifdef LOCAL
+	freopen("input.txt","rt",stdin);
+	#endif
+ 
+	map<string,int> mp;
+	int t;
+	long long n;
+	cin >> t;
+	for(int i = 0; i < t; i++)
+	{
+	 	char ch;
+	 	cin >> ch;
+	 	if(ch == '+')
+	 	{
+	 		cin >> n;
+	 		string s = f(n);
+	 		mp[s]++;
+	 	}
+	 	else if(ch == '-')
+	 	{
+	 	 	cin >> n;
+	 	 	string s = f(n);
+	 	 	mp[s]--;
+	 	}
+	 	else
+	 	{
+	 	 	string s;
+	 	 	cin >> s;
+	 	 	while(s.size() != 18)
+	 	 		s ='0'+s;
+	 	 	int now = mp[s];
+	 	 	cout << now <<endl; 
+	 	}
+	}
+ 
+	#ifdef LOCAL
+	cerr << "Time elapsed : " << 1.0*clock()/CLOCKS_PER_SEC << " s.\n";
+	#endif
+    return 0;
+}
