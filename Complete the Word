@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+ 
+#define sd(x) scanf("%d", &x)
+#define pb push_back
+#define pii pair<int, int>
+#define ll long long
+ 
+#define MAX 100009
+#define MOD 1000000007
+ 
+using namespace std;
+ 
+int main()
+{
+	string str;
+	cin >> str;
+ 
+	bool b = false;
+ 
+	for (int i = 25; i < str.size(); i++) {
+		bool done[200] = {};
+		bool f = true;
+ 
+		for (int j = 0; j < 26; j++) {
+			if (str[i - j] != '?' && done[str[i - j]]) {
+				f = false;
+				break;
+			}
+			done[str[i - j]] = true;
+		}
+		if (f) {
+			for (int j = 0; j < 26; j++) {
+				if (str[i - j] == '?') {
+					for (int p = 'A'; p <= 'Z'; p++) {
+						if (!done[p]) {
+							done[p] = true;
+							str[i - j] = p;
+							break;
+						}
+					}
+				}
+			}
+ 
+			b = true;
+			break;
+		}
+	}
+ 
+	if (b) {
+		for (int i = 0; i < str.size(); i++) {
+			if (str[i] == '?') {
+				str[i] = 'A';
+			}
+		}
+		cout << str << endl;
+	} else {
+		puts("-1");
+	}
+ 
+ 
+	return 0;
+}
