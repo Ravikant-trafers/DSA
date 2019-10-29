@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(false);cin.tie(nullptr);
+ 
+int32_t main()
+{
+	IOS;	
+	int n,cnt=0,g=0;
+	cin >> n;
+	vector<int> v;
+	for(int i = 0; i < n; i++)
+	{
+	 	int x;
+	 	cin >> x;
+	 	g = __gcd(g,x);
+	 	v.push_back(x);
+	 	if(x%2)
+	 	   	cnt++;
+	}
+	v.push_back(0);
+	cout <<"YES\n";
+	if(g > 1)
+		return cout << 0,0;
+	int l = v.size(),cont=0,ans=0;
+	for(int i = 0; i < l; i++)
+	{
+		if(v[i]&1)
+			cont++;
+		else
+		{
+		 	if(cont%2 == 0)
+		 	{
+		 	 	ans += cont/2;
+		 	}
+		 	else
+		 	{
+		 	 	ans += ((cont-1)/2)+2;
+		 	}
+		 	cont = 0;
+		}
+	}
+	cout << ans;
+	return 0;
+}      
